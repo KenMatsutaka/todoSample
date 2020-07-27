@@ -1,33 +1,26 @@
 <template>
   <div>
-    <h3>My Todo</h3>
-    <input type="text" v-model="newTodo" placeholder="Input here…" />
-    <button @click="addTodo()">ADD</button>
-    <h5>Todo List</h5>
-    <ul>
-      <li v-for="(todo, i) in todos" v-bind:key="i">
-        {{ todo }}
-        <button @click="deleteTodo(i)">DEL</button>
-      </li>
-    </ul>
+    <todo-form @add="addTodo($event)"></todo-form>
+    <todo-list :todos="todos" @delete="deleteTodo($event)"></todo-list>
   </div>
 </template>
 
 <script>
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 export default {
+  components: {
+    "todo-form": TodoForm,
+    "todo-list": TodoList
+  },
   data() {
     return {
-      todos: [],
-      newTodo: ""
+      todos: []
     };
   },
   methods: {
-    addTodo() {
-      if (this.newTodo === "") {
-        return;
-      }
-      this.todos.push(this.newTodo);
-      this.newTodo = "";
+    addTodo(newTodo) {
+      this.todos.push(newTodo);
     },
     deleteTodo(index) {
       this.todos.splice(index, 1);
