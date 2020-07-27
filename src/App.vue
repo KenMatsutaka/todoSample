@@ -18,12 +18,17 @@ export default {
       todos: []
     };
   },
+  created() {
+    this.todos = JSON.parse(localStorage.getItem("todos")) || [];
+  },
   methods: {
     addTodo(newTodo) {
       this.todos.push(newTodo);
+      localStorage.setItem("todos", JSON.stringify(this.todos));
     },
     deleteTodo(index) {
       this.todos.splice(index, 1);
+      localStorage.setItem("todos", JSON.stringify(this.todos));
     }
   }
 };
