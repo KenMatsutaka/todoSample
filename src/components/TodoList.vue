@@ -12,10 +12,18 @@
 
 <script>
 export default {
-  props: ["todos"],
+  data() {
+    return {
+      todos: []
+    };
+  },
+  created() {
+    this.todos = JSON.parse(localStorage.getItem("todos")) || [];
+  },
   methods: {
     deleteTodo(index) {
-      this.$emit("delete", index);
+      this.todos.splice(index, 1);
+      localStorage.setItem("todos", JSON.stringify(this.todos));
     }
   }
 };
