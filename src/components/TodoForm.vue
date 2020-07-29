@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3>My Todo</h3>
+    <touter-link to="/">Back</touter-link>
+    <br />
     <input type="text" v-model="newTodo" placeholder="Input here…" />
     <button @click="addTodo()">ADD</button>
   </div>
@@ -22,6 +23,7 @@ export default {
       todos.push(this.newTodo);
       localStorage.setItem("todos", JSON.stringify(todos));
       this.newTodo = "";
+      this.$router.push("/");
     }
   }
 };

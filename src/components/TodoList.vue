@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="addTodo()">ADD</button>
     <h5>Todo List</h5>
     <ul>
       <li v-for="(todo, index) in todos" v-bind:key="index">
@@ -24,6 +25,9 @@ export default {
     deleteTodo(index) {
       this.todos.splice(index, 1);
       localStorage.setItem("todos", JSON.stringify(this.todos));
+    },
+    addTodo() {
+      this.$router.push("/todos/add");
     }
   }
 };
